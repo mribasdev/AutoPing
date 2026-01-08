@@ -10,7 +10,7 @@ Descrição:
     Inclui categoria/identificação de cada IP.
 
 Autor:
-    Time de Certificação Residencial
+    Time de Certificação Residencial 
 
 Versão: 1.0.0
 Data: Janeiro/2026
