@@ -1,99 +1,157 @@
-================================================================================
-                    PING AUTOMATICO - VERIFICADOR DE HOSTS
-                              Versao 1.0.0
-================================================================================
+# 🚀 Ping Automático – Verificador de Hosts
 
-               Criado pelo TIME DE CERTIFICACAO RESIDENCIAL
-                              Janeiro/2026
+**Versão:** 1.0.0
+**Data:** Janeiro/2026
 
-================================================================================
+Desenvolvido pelo **Time de Certificação Residencial**
 
-DESCRICAO:
-----------
-Este script faz ping em todos os IPs e dominios do arquivo "hosts" e gera uma
-planilha Excel com os resultados, mostrando quais estao online (verde) e 
-offline (vermelho), organizados por categoria.
+---
 
-Desenvolvido para facilitar a verificacao em massa de conectividade de 
-servidores e servicos em ambientes corporativos.
+## 📌 Visão Geral
 
+O **Ping Automático – Verificador de Hosts** é um script em Python desenvolvido para realizar testes de conectividade (ICMP/Ping) em massa, a partir de uma lista de IPs e domínios definida pelo usuário.
 
-AUTOR:
-------
-Time de Certificacao Residencial
+Ao final da execução, o script gera uma **planilha Excel detalhada**, com indicadores visuais de status (**online** e **offline**), além de um **log completo da execução**, organizando os resultados por categoria.
 
+Este projeto foi criado para **facilitar a validação de conectividade de servidores e serviços em ambientes corporativos**.
 
-ARQUIVOS:
----------
-- ping_automatico.py   : Script principal
-- hosts                : Lista de IPs e dominios para verificar
-- requirements.txt     : Dependencias do Python
-- executar.bat         : Executa o script automaticamente (Windows)
-- pacotes/             : Pacotes para instalacao offline
+---
 
+## ✨ Funcionalidades
 
-COMO USAR:
-----------
+* Verificação automática de conectividade (ping) de múltiplos hosts
+* Suporte a IPs e domínios
+* Organização por categorias
+* Geração de relatório em Excel:
 
-OPCAO 1 - AUTOMATICA (Windows):
-   Basta dar duplo clique no arquivo "executar.bat"
+  * Hosts online destacados em **verde**
+  * Hosts offline destacados em **vermelho**
+* Geração de log detalhado da execução
+* Compatível com **instalação offline** (VDI ou ambientes restritos)
+* Execução simplificada via arquivo `.bat` no Windows
 
-OPCAO 2 - MANUAL:
-   1. Abra o Prompt de Comando (cmd) ou PowerShell
-   2. Navegue ate a pasta do script:
-      cd "C:\caminho\para\pasta"
-   3. Instale as dependencias:
-      pip install -r requirements.txt
-   4. Execute o script:
-      python ping_automatico.py
+---
 
+## 📁 Estrutura do Projeto
 
-PRE-REQUISITOS:
----------------
-1. Python 3.x instalado (https://www.python.org/downloads/)
-   - Durante a instalacao, marque "Add Python to PATH"
+```text
+.
+├── ping_automatico.py   # Script principal
+├── hosts                # Lista de IPs e domínios para verificação
+├── requirements.txt     # Dependências Python
+├── executar.bat         # Execução automática (Windows)
+├── pacotes/             # Pacotes para instalação offline
+```
 
-2. Conexao de rede com os hosts que serao verificados
+---
 
+## ▶️ Como Utilizar
 
-ARQUIVOS GERADOS:
------------------
-Apos a execucao, serao criados:
+### Opção 1 – Execução Automática (Windows)
 
-- resultado_ping_YYYYMMDD_HHMMSS.xlsx : Planilha com resultados
-  - Aba "Resultado Ping": Lista todos os hosts com status
-  - Aba "Resumo por Categoria": Estatisticas por grupo
+Basta dar **duplo clique** no arquivo:
 
-- ping_log_YYYYMMDD_HHMMSS.txt : Log completo da execucao
+```text
+executar.bat
+```
 
+---
 
-PERSONALIZACAO:
----------------
-Para adicionar/remover hosts, edite o arquivo "hosts":
+### Opção 2 – Execução Manual
 
-# NOME DA CATEGORIA
+1. Abra o **Prompt de Comando (cmd)** ou **PowerShell**
+2. Navegue até o diretório do projeto:
+
+   ```bash
+   cd "C:\caminho\para\pasta"
+   ```
+3. Instale as dependências:
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+4. Execute o script:
+
+   ```bash
+   python ping_automatico.py
+   ```
+
+---
+
+## ✅ Pré-requisitos
+
+* **Python 3.x** instalado
+  👉 [https://www.python.org/downloads/](https://www.python.org/downloads/)
+
+  > ⚠️ Durante a instalação, marque a opção **“Add Python to PATH”**
+
+* Conectividade de rede com os hosts que serão testados
+
+---
+
+## 📊 Arquivos Gerados
+
+Após a execução, os seguintes arquivos serão criados automaticamente:
+
+### 📄 Relatório Excel
+
+* **resultado_ping_YYYYMMDD_HHMMSS.xlsx**
+
+  * Aba **Resultado Ping**: lista completa de hosts e status
+  * Aba **Resumo por Categoria**: estatísticas agrupadas
+
+### 🧾 Log de Execução
+
+* **ping_log_YYYYMMDD_HHMMSS.txt**
+
+  * Registro detalhado de toda a execução
+
+---
+
+## ⚙️ Personalização
+
+Para adicionar ou remover hosts, edite o arquivo `hosts`.
+
+### Exemplo:
+
+```text
+# SERVIDORES INTERNOS
 10.10.10.10 dominio.exemplo.com
 10.10.10.11 outro-dominio.com
+```
 
-- Linhas que comecam com # sao categorias/comentarios
-- Formato: IP [TAB ou ESPACO] dominio
+### Regras do arquivo `hosts`:
 
+* Linhas iniciadas com `#` representam **categorias ou comentários**
+* Formato:
 
-INSTALACAO OFFLINE (VDI/Ambientes sem internet):
-------------------------------------------------
-1. Copie TODA a pasta incluindo a subpasta "pacotes"
+  ```text
+  IP [TAB ou ESPAÇO] domínio
+  ```
+
+---
+
+## 💾 Instalação Offline (VDI / Ambientes sem Internet)
+
+1. Copie **toda a pasta do projeto**, incluindo a subpasta `pacotes/`
 2. O script detecta automaticamente os pacotes offline
-3. Nao precisa de conexao com a internet
+3. **Não é necessária conexão com a internet**
 
+---
 
-DUVIDAS:
---------
-- Certifique-se de que o Python esta instalado corretamente
-- Verifique se tem permissao de rede para fazer ping nos hosts
-- Alguns hosts podem bloquear ICMP (ping) por firewall
+## ❓ Dúvidas e Observações
 
+* Verifique se o Python está corretamente instalado e acessível pelo PATH
+* Confirme se o usuário possui permissão de rede para realizar ping
+* Alguns hosts podem bloquear ICMP por regras de firewall
 
-================================================================================
-                Desenvolvido pelo Time de Certificacao Residencial
-                                  2026
-================================================================================
+---
+
+## 👥 Autor
+
+**Time de Certificação Residencial**
+© 2026
+
+---
+
+📌 *Projeto desenvolvido para uso interno e automação de testes de conectividade.*
