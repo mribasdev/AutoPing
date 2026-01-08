@@ -181,6 +181,7 @@ def create_excel_report(results, output_file):
     ws.title = "Resultado Ping"
     
     # Estilos
+  
     header_fill = PatternFill(start_color="1F4E79", end_color="1F4E79", fill_type="solid")
     header_font = Font(color="FFFFFF", bold=True, size=12)
     success_fill = PatternFill(start_color="C6EFCE", end_color="C6EFCE", fill_type="solid")
