@@ -26,6 +26,7 @@ import re
 import subprocess
 import platform
 import logging
+import os
 from datetime import datetime
 from openpyxl import Workbook
 from openpyxl.styles import PatternFill, Font, Alignment, Border, Side
@@ -35,16 +36,19 @@ import threading
 # Lock para escrita segura no console
 print_lock = threading.Lock()
 
-# Configuração do logging
-timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-log_filename = f"ping_log_{timestamp}.txt"
+# Cria pasta de resultados se não existir
+RESULTADO_DIR = "resultado"
+if not os.path.exists(RESULTADO_DIR):
+    os.makedirs(RESULTADO_DIR)
+
+# Configuração do logging (apenas console, sem arquivo)
+timestamp = datetime.now().strftime("%d-%m-%y_%H-%M")
 
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s | %(message)s',
     datefmt='%Y-%m-%d %H:%M:%S',
     handlers=[
-        logging.FileHandler(log_filename, encoding='utf-8'),
         logging.StreamHandler()
     ]
 )
@@ -383,6 +387,16 @@ def main():
     total = len(unique_entries)
     logger.info(f"Total de entradas encontradas: {total}")
     
+    # Verifica se há entradas para processar
+    if total == 0:
+        logger.warning("=" * 90)
+        logger.warning("  ATENCAO: Nenhum host encontrado no arquivo 'hosts'!")
+        logger.warning("  Por favor, adicione IPs/dominios no arquivo antes de executar.")
+        logger.warning("  Formato esperado: IP DOMINIO")
+        logger.warning("  Exemplo: 8.8.8.8 dns.google.com")
+        logger.warning("=" * 90)
+        return
+    
     # Mostra categorias encontradas
     categories = set(e[2] for e in unique_entries)
     logger.info(f"Categorias encontradas: {len(categories)}")
@@ -416,8 +430,8 @@ def main():
     end_time = datetime.now()
     duration = (end_time - start_time).total_seconds()
     
-    # Gera nome do arquivo com timestamp
-    output_file = f"resultado_ping_{timestamp}.xlsx"
+    # Gera nome do arquivo com timestamp na pasta resultado
+    output_file = os.path.join(RESULTADO_DIR, f"resultado_ping_{timestamp}.xlsx")
     
     # Cria planilha
     logger.info("-" * 90)
@@ -436,7 +450,6 @@ def main():
     logger.info(f"  [+] Online:  {online}")
     logger.info(f"  [-] Offline: {offline}")
     logger.info(f"  Tempo total: {duration:.2f} segundos")
-    logger.info(f"  Arquivo de log: {log_filename}")
     logger.info(f"  Planilha: {output_file}")
     logger.info("=" * 90)
 
