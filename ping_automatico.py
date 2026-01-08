@@ -55,6 +55,7 @@ def parse_hosts_file(filepath):
     """
     Extrai IPs e domínios do arquivo hosts com suas categorias
     Retorna lista de tuplas (ip, dominio, categoria)
+    
     """
     entries = []
     ip_pattern = re.compile(r'^(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\s+(.+)$')
